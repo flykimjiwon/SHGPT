@@ -1,0 +1,36 @@
+{
+  "name": "gpt",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "cp .env.local.dev .env.local && next dev --turbopack",
+    "dev:prod": "cp .env.local.prod .env.local && next dev --turbopack",
+    "build": "next build --turbopack",
+    "build:dev": "cp .env.local.dev .env.local && next build --turbopack",
+    "build:prod": "cp .env.local.prod .env.local && next build --turbopack",
+    "start": "next start",
+    "start:dev": "cp .env.local.dev .env.local && next start",
+    "start:prod": "cp .env.local.prod .env.local && next start",
+    "lint": "eslint",
+    "env:dev": "cp .env.local.dev .env.local && echo '개발환경으로 전환됨 (gemma2:1b @ localhost:11434)'",
+    "env:prod": "cp .env.local.prod .env.local && echo '실제환경으로 전환됨 (다중 인스턴스 로드밸런싱)'"
+  },
+  "dependencies": {
+    "@uiw/react-markdown-preview": "^5.1.5",
+    "bcrypt": "^6.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "lucide-react": "^0.542.0",
+    "mongodb": "^6.19.0",
+    "next": "15.5.0",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "rehype-sanitize": "^6.0.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "eslint": "^9",
+    "eslint-config-next": "15.5.0",
+    "tailwindcss": "^4"
+  }
+}

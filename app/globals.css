@@ -1,0 +1,154 @@
+@import "tailwindcss";
+
+/* 스크롤바 스타일링 */
+@layer base {
+  /* WebKit 브라우저 (Chrome, Safari) */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-100;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 rounded-full hover:bg-gray-400;
+  }
+
+  ::-webkit-scrollbar-corner {
+    @apply bg-gray-100;
+  }
+
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(209 213 219) rgb(243 244 246);
+  }
+
+  /* 부드러운 전환 효과 */
+  html {
+    @apply transition-colors duration-200;
+  }
+
+  body {
+    @apply bg-gray-50 text-gray-900 font-sans;
+  }
+}
+
+/* 커스텀 버튼 스타일 */
+@layer components {
+  .btn-primary {
+    @apply px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2;
+  }
+
+  .btn-danger {
+    @apply px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-lg text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2;
+  }
+
+  .btn-success {
+    @apply px-3 py-1.5 bg-green-600 hover:bg-green-700 text-white rounded-lg text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2;
+  }
+
+  .input-primary {
+    @apply w-full px-3 py-2 bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200;
+  }
+
+  .card {
+    @apply bg-white border border-gray-200 rounded-xl shadow-sm;
+  }
+
+  .chat-message-user {
+    @apply bg-blue-600 text-white rounded-2xl rounded-br-md px-4 py-3 max-w-[80%] ml-auto;
+  }
+
+  .chat-message-assistant {
+    @apply bg-white border border-gray-200 rounded-2xl rounded-bl-md px-4 py-3 max-w-[85%] mr-auto;
+    color: #24292F !important; /* Force dark text in all modes */
+  }
+}
+
+/* 마크다운 스타일 개선 */
+@layer utilities {
+  .markdown-content {
+    color: #24292F !important; /* Force dark text in all modes */
+  }
+
+  .markdown-content h1, 
+  .markdown-content h2, 
+  .markdown-content h3,
+  .markdown-content h4,
+  .markdown-content h5,
+  .markdown-content h6 {
+    color: #24292F !important; /* Force dark text in all modes */
+    font-weight: 600;
+  }
+
+  .markdown-content code {
+    @apply bg-gray-100 px-1 py-0.5 rounded text-sm;
+    color: #24292F !important; /* Force dark text in all modes */
+  }
+
+  .markdown-content p {
+    color: #24292F !important; /* Force dark text in all modes */
+  }
+
+  .markdown-content li {
+    color: #24292F !important; /* Force dark text in all modes */
+  }
+
+  .markdown-content blockquote {
+    @apply border-l-4 border-gray-300 pl-4 italic;
+    color: #24292F !important; /* Force dark text in all modes */
+  }
+
+  .markdown-content a {
+    color: #0969da !important; /* Blue links */
+  }
+
+  .markdown-content strong {
+    color: #24292F !important; /* Force dark text in all modes */
+  }
+
+  .markdown-content em {
+    color: #24292F !important; /* Force dark text in all modes */
+  }
+
+  /* 모든 마크다운 하위 요소에 강제 적용 */
+  .markdown-content * {
+    color: #24292F !important; /* Force dark text in all modes */
+  }
+
+  .markdown-content a * {
+    color: #0969da !important; /* Keep blue links */
+  }
+
+  .markdown-content pre {
+    @apply bg-gray-100 p-4 rounded-lg overflow-x-auto;
+  }
+
+  .markdown-content pre code {
+    @apply bg-transparent p-0;
+  }
+
+  .markdown-content blockquote {
+    @apply border-l-4 border-gray-300 pl-4 italic text-gray-600;
+  }
+
+  .markdown-content table {
+    @apply border-collapse border border-gray-300;
+  }
+
+  .markdown-content th,
+  .markdown-content td {
+    @apply border border-gray-300 px-3 py-2;
+  }
+
+  .markdown-content th {
+    @apply bg-gray-100 font-semibold;
+  }
+}
