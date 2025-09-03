@@ -14,7 +14,31 @@
 - **인증**: JWT (JSON Web Tokens) 및 `bcrypt`를 사용한 비밀번호 해싱
 - **UI/UX**: Markdown 렌더링(`@uiw/react-markdown-preview`), 실시간 스트리밍 응답 처리
 
-## 3. 시스템 아키텍처
+## 3. 프로젝트 구조
+
+```
+/
+├── app/                  # Next.js App Router: 페이지 및 API 라우트
+│   ├── api/              # API 엔드포인트
+│   │   └── generate/     # AI 응답 생성 API
+│   ├── components/       # 재사용 가능한 React 컴포넌트
+│   ├── login/            # 로그인 페이지
+│   ├── signup/           # 회원가입 페이지
+│   ├── layout.js         # 루트 애플리케이션 레이아웃
+│   └── page.js           # 메인 채팅 페이지
+├── lib/                  # 백엔드 로직 및 유틸리티
+│   ├── auth.js           # 인증 함수 (JWT)
+│   ├── mongo.js          # MongoDB 연결 헬퍼
+│   └── ollama.js         # Ollama 라운드-로빈 로직
+├── public/               # 정적 자산 (이미지 등)
+├── .env.local            # 로컬 환경 변수 (Git에서 무시됨)
+├── .gitignore            # Git 무시 파일 목록
+├── next.config.mjs       # Next.js 설정
+├── package.json          # 프로젝트 의존성 및 스크립트
+└── start-ollama-instances.sh # Ollama 서비스 시작 스크립트
+```
+
+## 4. 시스템 아키텍처
 
 1.  **클라이언트 (Next.js Frontend)**: 사용자는 웹 인터페이스를 통해 질문을 입력하고 모델을 선택합니다. 요청은 JWT 토큰과 함께 `/api/generate` 엔드포인트로 전송됩니다.
 2.  **API 라우트 (Next.js Backend)**:
@@ -28,7 +52,7 @@
     - 스트리밍이 완료된 후, 사용자의 질문과 AI의 전체 답변이 `messages` 컬렉션에 저장됩니다.
     - 사용자 계정 정보는 `users` 컬렉션에 저장됩니다.
 
-## 4. 주요 기능 상세
+## 5. 주요 기능 상세
 
 ### a. 실시간 스트리밍 채팅 (`app/page.js`)
 
@@ -51,7 +75,7 @@
 - **API (`/api/generate`)**: 요청 헤더의 `Authorization: Bearer <token>`을 검증하여 인가된 사용자만 AI 서비스를 이용할 수 있도록 제한합니다.
 - **DB 저장**: AI 응답이 완료되면, 해당 대화(질문 및 답변)를 사용자의 ID, 이메일과 함께 MongoDB에 영구적으로 기록합니다.
 
-## 5. 설정 및 실행 방법
+## 6. 설정 및 실행 방법
 
 1.  **의존성 설치**:
     ```bash

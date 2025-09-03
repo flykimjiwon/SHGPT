@@ -13,7 +13,7 @@ import MarkdownPreview from "@uiw/react-markdown-preview";
 import rehypeSanitize from "rehype-sanitize";
 import LoadingSpinner from './components/LoadingSpinner';
 import { getModelOptions, getDefaultModel } from '@/lib/ollama';
-import { Send, Plus, Edit, X, LogOut, MessageCircle, Settings, Loader2, Menu, ChevronLeft, User, Bot } from 'lucide-react';
+import { Send, Plus, Edit, X, LogOut, MessageCircle, Settings, Loader2, Menu, ChevronLeft } from 'lucide-react';
 
 /* ---------- 환경별 모델 옵션 (동적 로드) ---------- */
 // 환경별 모델 옵션은 lib/ollama.js에서 관리됨
@@ -32,7 +32,7 @@ const ChatInput = memo(function ChatInput({
   modelOptions,
 }) {
   return (
-    <footer className="w-full max-w-4xl mx-auto p-4 bg-white border-t border-gray-200">
+    <footer className="w-full max-w-4xl mx-auto p-4 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
       <div className="relative">
         <textarea
           rows={3}
@@ -51,7 +51,7 @@ const ChatInput = memo(function ChatInput({
             value={selectedModel}
             onChange={(e) => setSelectedModel(e.target.value)}
             disabled={loading}
-            className="text-xs bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded px-2 py-1 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="text-xs bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 rounded px-2 py-1 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             {modelOptions.map((option) => (
               <option key={option.id} value={option.id}>
@@ -139,7 +139,7 @@ function Sidebar({
       {/* 접힌 사이드바 (아이콘만) */}
       <div 
         className={`
-          fixed left-0 top-0 h-full w-16 bg-white border-r border-gray-200 z-40
+          fixed left-0 top-0 h-full w-16 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700 z-40
           flex flex-col items-center py-4
           transform transition-transform duration-300 ease-in-out
           ${sidebarOpen ? '-translate-x-full' : 'translate-x-0'}
@@ -149,32 +149,32 @@ function Sidebar({
       >
         {/* 메뉴 버튼 */}
         <button
-          className="p-3 rounded-lg hover:bg-gray-100 transition-colors mb-4"
+          className="p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors mb-4"
           title="사이드바"
         >
-          <Menu className="h-5 w-5 text-gray-600" />
+          <Menu className="h-5 w-5 text-gray-600 dark:text-gray-400" />
         </button>
 
         {/* 채팅방 추가 */}
         {rooms.length < 10 && (
           <button
             onClick={() => !loading && addRoom()}
-            className="p-3 rounded-lg hover:bg-gray-100 transition-colors mb-4"
+            className="p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors mb-4"
             title="새 채팅방"
             disabled={loading}
           >
-            <Plus className="h-5 w-5 text-gray-600" />
+            <Plus className="h-5 w-5 text-gray-600 dark:text-gray-400" />
           </button>
         )}
 
         {/* 로그아웃 */}
         <button
           onClick={() => !loading && handleLogout()}
-          className="p-3 rounded-lg hover:bg-gray-100 transition-colors mt-auto"
+          className="p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors mt-auto"
           title="로그아웃"
           disabled={loading}
         >
-          <LogOut className="h-5 w-5 text-gray-600" />
+          <LogOut className="h-5 w-5 text-gray-600 dark:text-gray-400" />
         </button>
       </div>
 
@@ -189,7 +189,7 @@ function Sidebar({
       {/* 펼쳐진 사이드바 */}
       <div 
         className={`
-          fixed left-0 top-0 h-full w-80 bg-white border-r border-gray-200 z-50
+          fixed left-0 top-0 h-full w-80 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700 z-50
           transform transition-transform duration-300 ease-in-out
           ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
           ${loading ? 'pointer-events-none opacity-50' : ''}
@@ -197,23 +197,23 @@ function Sidebar({
         onMouseLeave={() => !loading && setSidebarOpen(false)}
       >
         {/* 사이드바 헤더 */}
-        <div className="flex items-center justify-center p-4 border-b border-gray-200">
-          <h2 className="text-lg font-semibold text-gray-800">채팅방</h2>
+        <div className="flex items-center justify-center p-4 border-b border-gray-200 dark:border-gray-700">
+          <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-200">채팅방</h2>
         </div>
 
         {/* 현재 채팅방 정보 */}
-        <div className="p-4 border-b border-gray-200 bg-blue-50">
+        <div className="p-4 border-b border-gray-200 dark:border-gray-700 bg-blue-50 dark:bg-blue-900/20">
           <div className="flex items-center gap-3">
             <div className="w-3 h-3 bg-blue-600 rounded-full flex-shrink-0" />
             <div className="min-w-0 flex-1">
-              <p className="text-sm font-medium text-gray-900">현재 채팅방</p>
-              <p className="text-sm text-gray-600 truncate">{currentRoomName}</p>
+              <p className="text-sm font-medium text-gray-900 dark:text-gray-100">현재 채팅방</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400 truncate">{currentRoomName}</p>
             </div>
           </div>
         </div>
 
         {/* 새 방 추가 버튼 */}
-        <div className="p-4 border-b border-gray-200">
+        <div className="p-4 border-b border-gray-200 dark:border-gray-700">
           {rooms.length < 10 && (
             <button
               className="btn-primary w-full flex items-center justify-center gap-2"
@@ -237,7 +237,7 @@ function Sidebar({
                   transition-all duration-200
                   ${room.id === currentRoom
                     ? "bg-blue-600 text-white shadow-md"
-                    : "bg-gray-50 hover:bg-gray-100 text-gray-700"
+                    : "bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300"
                   }
                   ${editingRoom === room.id ? "" : "cursor-pointer"}
                   ${loading ? "pointer-events-none opacity-50" : ""}
@@ -263,7 +263,7 @@ function Sidebar({
                         }
                       }}
                       onBlur={saveEdit}
-                      className="flex-1 bg-white text-gray-900 px-2 py-1 rounded text-sm font-medium min-w-0"
+                      className="flex-1 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 px-2 py-1 rounded text-sm font-medium min-w-0"
                       maxLength={15}
                       autoFocus
                     />
@@ -342,18 +342,18 @@ function Sidebar({
         </div>
 
         {/* 하단 사용자 정보 */}
-        <div className="p-4 border-t border-gray-200 bg-gray-50">
+        <div className="p-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
           <div className="flex items-center justify-between">
             <div className="min-w-0 flex-1">
-              <p className="text-sm font-medium text-gray-900">로그인 계정</p>
-              <p className="text-xs text-gray-600 truncate">{userEmail}</p>
+              <p className="text-sm font-medium text-gray-900 dark:text-gray-100">로그인 계정</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 truncate">{userEmail}</p>
             </div>
             <button
               onClick={handleLogout}
-              className="ml-3 p-2 rounded-lg hover:bg-gray-200 transition-colors"
+              className="ml-3 p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
               title="로그아웃"
             >
-              <LogOut className="h-4 w-4 text-gray-600" />
+              <LogOut className="h-4 w-4 text-gray-600 dark:text-gray-400" />
             </button>
           </div>
         </div>
@@ -413,6 +413,28 @@ export default function Home() {
     }
     
     loadModelOptions();
+  }, []);
+
+  // ---------- 다크 모드 설정 ----------
+  useEffect(() => {
+    // 시스템 다크 모드 설정 감지 및 적용
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const applyDarkMode = (isDark) => {
+      if (isDark) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    };
+
+    // 초기 설정
+    applyDarkMode(mediaQuery.matches);
+
+    // 다크 모드 변경 감지
+    const handleChange = (e) => applyDarkMode(e.matches);
+    mediaQuery.addEventListener('change', handleChange);
+
+    return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
 
   // ---------- 토큰 검증 및 사용자 정보 추출 ----------
@@ -679,7 +701,7 @@ export default function Home() {
 
   /* ---------- UI ---------- */
   return (
-    <div className="min-h-screen bg-gray-50 transition-colors duration-200 pl-16 relative">{/* LoadingSpinner 제거 - 입력 영역 오버레이로 대체 */}
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200 pl-16 relative">{/* LoadingSpinner 제거 - 입력 영역 오버레이로 대체 */}
 
       {/* 로딩 중 전체 화면 오버레이 */}
       {loading && (
@@ -707,9 +729,9 @@ export default function Home() {
         loading={loading}
       />
 
-      <header className="w-full border-b border-gray-200 bg-white/80 backdrop-blur-sm sticky top-0 z-10">
+      <header className="w-full border-b border-gray-200 dark:border-gray-700 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm sticky top-0 z-10">
         <div className="max-w-4xl mx-auto flex items-center justify-center gap-4 px-4 py-3">
-          <h1 className="text-xl font-bold text-gray-800">
+          <h1 className="text-xl font-bold text-gray-800 dark:text-gray-200">
             디지털서비스개발부 AI
           </h1>
         </div>
@@ -720,10 +742,10 @@ export default function Home() {
         {messages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-64 text-center">
             <MessageCircle className="h-16 w-16 text-gray-300 mb-4" />
-            <h3 className="text-lg font-medium text-gray-600 mb-2">
+            <h3 className="text-lg font-medium text-gray-600 dark:text-gray-400 mb-2">
               새로운 대화를 시작하세요
             </h3>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-gray-500 dark:text-gray-500">
               아래 입력창에 질문을 입력하면 AI가 답변해드립니다.
             </p>
           </div>
@@ -733,28 +755,9 @@ export default function Home() {
               key={idx}
               className={`flex w-full ${msg.role === "user" ? "justify-end" : "justify-start"} mb-4`}
             >
-              <div className={`flex items-start gap-3 max-w-[85%] ${msg.role === "user" ? "flex-row-reverse" : "flex-row"}`}>
-                {/* 아이콘 */}
-                <div className="flex-shrink-0 mt-1">
-                  {msg.role === "user" ? (
-                    <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
-                      <User className="h-4 w-4 text-gray-600" />
-                    </div>
-                  ) : (
-                    <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
-                      <Bot className="h-4 w-4 text-gray-600" />
-                    </div>
-                  )}
-                </div>
-                
-                {/* 메시지 내용 */}
-                <div className={msg.role === "user" ? "chat-message-user" : "chat-message-assistant"}>
-                  {msg.role === "assistant" ? (
-                    <SafeMarkdown source={msg.text} />
-                  ) : (
-                    <div className="whitespace-pre-wrap">{msg.text}</div>
-                  )}
-                </div>
+              {/* 메시지 내용 - 아이콘 제거, 너비 증가 */}
+              <div className={`max-w-[95%] md:max-w-[90%] lg:max-w-[85%] xl:max-w-[80%] ${msg.role === "user" ? "chat-message-user" : "chat-message-assistant"}`}>
+                <SafeMarkdown source={msg.text} />
               </div>
             </div>
           ))
@@ -763,13 +766,13 @@ export default function Home() {
       </main>
 
       {/* 모델 선택 및 입력 영역 - 하단 고정 */}
-      <div className={`sticky bottom-0 bg-white border-t border-gray-200 ${loading ? 'relative' : ''}`}>
+      <div className={`sticky bottom-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 ${loading ? 'relative' : ''}`}>
         {/* 로딩 중 오버레이 */}
         {loading && (
-          <div className="absolute inset-0 bg-white/80 backdrop-blur-sm z-30 flex items-center justify-center">
+          <div className="absolute inset-0 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm z-30 flex items-center justify-center">
             <div className="flex items-center gap-3">
               <Loader2 className="h-5 w-5 text-blue-600 animate-spin" />
-              <span className="text-gray-600 text-sm">응답 생성 중...</span>
+              <span className="text-gray-600 dark:text-gray-400 text-sm">응답 생성 중...</span>
               <button
                 onClick={stopStreaming}
                 className="btn-danger flex items-center gap-1 text-xs py-1 px-2"
